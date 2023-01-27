@@ -1,0 +1,26 @@
+import random
+class Kaart1:
+    def init(self, kleur, symbool, vulling, aantal):
+        self.kleur = kleur
+        self.symbool = symbool
+        self.vulling = vulling
+        self.aantal = aantal
+
+    def hash(self):
+        return hash((self.kleur, self.symbool, self.vulling, self.aantal))
+    
+
+kleuren = ["green", "red", "purple"] # de mogelijke kleuren voor kaarten
+symbolen = ["oval", "squiggle", "diamond"] # de mogelijke symbolen voor kaarten
+vullingen = ["filled", "shaded", "empty"] # de vulling van de symbolen op een kaart
+aantallen = [1, 2, 3] # het aantal symbolen op een kaart
+
+
+kaarten = []
+for kleur in kleuren:
+        for symbool in symbolen:
+            for vulling in vullingen:
+                for aantal in aantallen:
+                    kaarten.append((str(kleur), str(symbool), str(vulling), int(aantal)))
+print(kaarten)
+print(len(kaarten))
