@@ -1,0 +1,14 @@
+import random
+import itertools
+
+kaarten = []
+def alle_kaart():
+    for kleur in ("green", "red", "purple"):
+        for symbool in ("oval", "squiggle", "diamond"):
+            for vulling in ("filled", "shaded", "empty"):
+                for aantal in (1, 2, 3):
+                    kaarten.append((str(kleur), str(symbool), str(vulling), int(aantal)))
+alle_kaart()
+random.shuffle(kaarten) 
+twaalf_kaarten = kaarten[:12]
+print (twaalf_kaarten)
