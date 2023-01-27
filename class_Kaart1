@@ -1,0 +1,87 @@
+import random
+import itertools
+class Kaart1:
+    def _init_(self, kleur, symbool, vulling, aantal):
+        self.kleur = kleur
+        self.symbool = symbool
+        self.vulling = vulling
+        self.aantal = aantal
+
+    def _hash_(self):
+        return hash((self.kleur, self.symbool, self.vulling, self.aantal))
+    
+
+kleuren = ["green", "red", "purple"] # de mogelijke kleuren voor kaarten
+symbolen = ["oval", "squiggle", "diamond"] # de mogelijke symbolen voor kaarten
+vullingen = ["filled", "shaded", "empty"] # de vulling van de symbolen op een kaart
+aantallen = [1, 2, 3] # het aantal symbolen op een kaart
+
+
+kaarten = []
+for kleur in kleuren:
+        for symbool in symbolen:
+            for vulling in vullingen:
+                for aantal in aantallen:
+                    kaarten.append((str(kleur), str(symbool), str(vulling), int(aantal)))
+                    random.shuffle(kaarten)
+print(kaarten)
+
+twaalf_kaarten = kaarten[:12]
+print(twaalf_kaarten)
+
+
+
+def setje (kaart1, kaart2, kaart3):
+	kleur = alle (kaart1.Kleur, kaart2.Kleur, kaart3.Kleur)
+	vorm = alle (kaart1.Vorm, kaart2.Vorm, kaart3.Vorm)
+	aantal = alle (kaart1.Aantal, kaart2.Aantal, kaart3.Aantal)
+	vulling = alle (kaart1.Vulling, kaart2.Vulling, kaart3.Vulling)
+	return kleur and vorm and aantal and vulling
+
+    
+def alle (informatie1, informatie2, informatie3):
+	if informatie1 == informatie2 and informatie2 == informatie3 and informatie1 == informatie3:
+		return True
+	elif (informatie1 != informatie2) and (informatie2 != informatie3) and (informatie3 != informatie1):
+		return True
+	else:
+		return False
+    
+def wel_of_geen_set(kaart1, kaart2, kaart3):
+    if setje(kaart1, kaart2, kaart3):
+        return "Het is een SET!"
+    else:
+        return "Het is geen SET!"
+
+class Kaart:
+	def __init__ (self, Kleur, Vorm, Aantal, Vulling):
+		self.Kleur = Kleur
+		self.Vorm = Vorm
+		self.Aantal = Aantal
+		self.Vulling = Vulling
+		self.geklikte_kaarten = False
+    		
+	def __eq__ (self, other):
+		return  self.Kleur == other.Kleur and \
+				self.Vorm == other.Vorm and \
+				self.Aantal == other.Aantal and \
+				self.Vulling == other.Vulling
+
+	def __ne__ (self, other):
+		return not self.__eq__(other)
+	
+	def clicked (self, button_name):
+		self.geklikte_kaarten = not self.geklikte_kaarten
+
+	def update (self):
+		pass
+    
+kaart1 = Kaart("purple", "oval", 1, "striped")
+kaart2 = Kaart("red", "oval", 1, "striped")
+kaart3 = Kaart("green", "oval", 1, "striped")
+print(wel_of_geen_set (kaart1, kaart2, kaart3))
+
+
+all_set= [["green", "red", "purple"],["oval", "squiggle", "diamond"],["filled", "shaded", "empty"],[1, 2, 3]]
+print(len(list(itertools.product(*all_set))))# waarom hebben we 81 kaarten
+
