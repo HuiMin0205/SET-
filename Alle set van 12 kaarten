@@ -1,0 +1,45 @@
+import random
+import itertools
+
+kaarten = []
+def alle_kaart():
+    for kleur in ("green", "red", "purple"):
+        for symbool in ("oval", "squiggle", "diamond"):
+            for vulling in ("filled", "shaded", "empty"):
+                for aantal in (1, 2, 3):
+                    kaarten.append((str(kleur), str(symbool), str(vulling), int(aantal)))
+alle_kaart()
+random.shuffle(kaarten) 
+twaalf_kaarten = kaarten[:12]
+print(twaalf_kaarten)
+
+a=list(set(itertools.combinations(twaalf_kaarten,3)))
+print(a)# hier staat verschillende groepen dat een of geen set
+def b(p):
+    card=kaarten[0]
+    kaarten.remove(kaarten[0])
+    print(str(card))
+    return card
+
+while True:
+    for i in range(len(a)):
+        b1=a[i][0]
+        b2=a[i][1]
+        b3=a[i][2]
+        if b1[0]==b2[0]!=b3[0] or\
+                    b1[0]!=b2[0]==b3[0] or\
+                        b1[0]==b3[0]!=b2[0] or\
+                            b1[1]==b2[1]!=b3[1] or\
+                                b1[1]!=b2[1]==b3[1] or\
+                                    b1[1]==b3[1]!=b2[1] or\
+                                        b1[2]==b2[2]!=b3[2] or\
+                                            b1[2]!=b2[2]==b3[2] or\
+                                                b1[2]==b3[2]!=b2[2] or\
+                                                    b1[3]==b2[3]!=b3[3] or\
+                                                        b1[3]!=b2[3]==b3[3]or\
+                                                            b1[3]==b3[3]!=b2[3]:
+                    pass
+        else: 
+            print (b1,b2,b3, "Het is een SET!")
+            print("Deze SET zit op de" ,i+1,"van de 220 verschillende groepen van 12 kaarten.")#Waar staat deze set groep in de 220 verschillende groepen.
+    break
