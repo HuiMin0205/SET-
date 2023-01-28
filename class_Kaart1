@@ -94,6 +94,29 @@ while True:
             print("Deze SET zit op de" ,j+1,"van de 220 verschillende groepen van 12 kaarten.")#Waar staat deze set groep in de 220 verschillende groepen.
     break
 
+while True:
+    for j in range(len(a)):
+        b1=a[j][0]
+        b2=a[j][1]
+        b3=a[j][2]
+        if b1[0]==b2[0]!=b3[0] or\
+                    b1[0]!=b2[0]==b3[0] or\
+                        b1[0]==b3[0]!=b2[0] or\
+                            b1[1]==b2[1]!=b3[1] or\
+                                b1[1]!=b2[1]==b3[1] or\
+                                    b1[1]==b3[1]!=b2[1] or\
+                                        b1[2]==b2[2]!=b3[2] or\
+                                            b1[2]!=b2[2]==b3[2] or\
+                                                b1[2]==b3[2]!=b2[2] or\
+                                                    b1[3]==b2[3]!=b3[3] or\
+                                                        b1[3]!=b2[3]==b3[3]or\
+                                                            b1[3]==b3[3]!=b2[3]:
+                    pass
+        else: 
+            print (b1,b2,b3, "Het is een SET!")
+            break
+    break
+
 c=list(set(itertools.combinations(kaarten,3)))
 
 def b_1(p):
@@ -146,6 +169,29 @@ while True:
         else: 
            print ((b1,b2,b3, "Het is een set!"))
            print("Deze SET zit op de" ,k+1,"van de 85320 verschillende groepen van 81 kaarten.")#Waar staat deze set groep in de 85320 verschillende groepen.
+    break
+
+while True:
+    for k in range(len(c)):
+        b1=c[k][0]
+        b2=c[k][1]
+        b3=c[k][2]
+        if b1[0]==b2[0]!=b3[0] or\
+                    b1[0]!=b2[0]==b3[0] or\
+                        b1[0]==b3[0]!=b2[0] or\
+                            b1[1]==b2[1]!=b3[1] or\
+                                b1[1]!=b2[1]==b3[1] or\
+                                    b1[1]==b3[1]!=b2[1] or\
+                                        b1[2]==b2[2]!=b3[2] or\
+                                            b1[2]!=b2[2]==b3[2] or\
+                                                b1[2]==b3[2]!=b2[2] or\
+                                                    b1[3]==b2[3]!=b3[3] or\
+                                                        b1[3]!=b2[3]==b3[3]or\
+                                                            b1[3]==b3[3]!=b2[3]:
+                    pass
+        else: 
+           print ((b1,b2,b3, "Het is een set!"))
+           break
     break
 
 def setje (kaart1, kaart2, kaart3):
