@@ -1,8 +1,8 @@
 import random
 import itertools
 
-kaarten = []
-def alle_kaart():
+kaarten = [] #lege lijst
+def alle_kaart(): #hier definiëren we de kaarten
     for kleur in ("green", "red", "purple"):
         for symbool in ("oval", "squiggle", "diamond"):
             for vulling in ("filled", "shaded", "empty"):
@@ -11,7 +11,7 @@ def alle_kaart():
 alle_kaart()
 random.shuffle(kaarten) 
 
-c=list(set(itertools.combinations(kaarten,3)))
+c=list(set(itertools.combinations(kaarten,3))) #alle mogelijke combinatie van alle kaarten maken
 print("81 kaarten kunnen 85320 verschillende groepen met verschillende 3 kaarten maken ",len(c)) 
 def d(p):
     card=kaarten[0]
@@ -19,7 +19,7 @@ def d(p):
     print(str(card))
     return card
 
-while True:
+while True: #algoritme om te checken of de combinatie een set vormen
     for k in range(len(c)):
         b1=c[k][0]
         b2=c[k][1]
@@ -39,5 +39,5 @@ while True:
                     pass
         else: 
            print ((b1,b2,b3, "Het is een set!"))
-           break        
+           break  #om 1 set te krijgen      
     break
