@@ -2,25 +2,25 @@ import random
 import itertools
 
 kaarten = []
-def alle_kaart():
+def alle_kaart(): #hier definiëren we de kaarten
     for kleur in ("green", "red", "purple"):
         for symbool in ("oval", "squiggle", "diamond"):
             for vulling in ("filled", "shaded", "empty"):
                 for aantal in (1, 2, 3):
                     kaarten.append((str(kleur), str(symbool), str(vulling), int(aantal)))
 alle_kaart()
-random.shuffle(kaarten) 
-twaalf_kaarten = kaarten[:12]
+random.shuffle(kaarten) #schudden
+twaalf_kaarten = kaarten[:12] #slicing
 print(twaalf_kaarten)
 
-a=list(set(itertools.combinations(twaalf_kaarten,3)))
+a=list(set(itertools.combinations(twaalf_kaarten,3))) #alle combinatie maken ui de 12 kaarten
 def b(p):
     card=kaarten[0]
     kaarten.remove(kaarten[0])
     print(str(card))
     return card
 m=0
-while True:
+while True: #algoritme om te checken of de combinatie een set vormen
     for j in range(len(a)):
         b1=a[j][0]
         b2=a[j][1]
@@ -40,7 +40,7 @@ while True:
                     pass
         else: 
             print (b1,b2,b3, "Het is een SET!")
-            m+=1
+            m+=1 
             
     break
-print(m)
+print(m) #buiten, om aantal sets te bereken
