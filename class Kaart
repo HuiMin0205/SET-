@@ -1,0 +1,22 @@
+class Kaart: #klasse kaart
+	def __init__ (self, Kleur, Vorm, Aantal, Vulling):
+		self.Kleur = Kleur
+		self.Vorm = Vorm
+		self.Aantal = Aantal
+		self.Vulling = Vulling
+		self.geklikte_kaarten = False
+    		
+	def __eq__ (self, other): #definiëren of de kaarten gelijk zijn
+		return  self.Kleur == other.Kleur and \
+				self.Vorm == other.Vorm and \
+				self.Aantal == other.Aantal and \
+				self.Vulling == other.Vulling
+
+	def __ne__ (self, other): # definiëren of de kaarten niet gelijk zijn
+		return not self.__eq__(other)
+	
+	def clicked (self, button_name):
+		self.geklikte_kaarten = not self.geklikte_kaarten
+
+	def update (self):
+		pass
