@@ -1,14 +1,14 @@
 import random
 import itertools
 
-kaarten = []
-def alle_kaart():
+kaarten = [] #lege lijst 
+def alle_kaart(): #definitie van alle kaarten
     for kleur in ("green", "red", "purple"):
         for symbool in ("oval", "squiggle", "diamond"):
             for vulling in ("filled", "shaded", "empty"):
                 for aantal in (1, 2, 3):
                     kaarten.append((str(kleur), str(symbool), str(vulling), int(aantal)))
-alle_kaart()
-random.shuffle(kaarten) 
-twaalf_kaarten = kaarten[:12]
+alle_kaart() #informatie paken uit de bovenstaande algoritme
+random.shuffle(kaarten) #schudden
+twaalf_kaarten = kaarten[:12] #eerste 12 kaarten paken
 print (twaalf_kaarten)
