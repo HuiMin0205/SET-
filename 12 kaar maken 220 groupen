@@ -1,16 +1,16 @@
 import random
 import itertools
 
-kaarten = []
-def alle_kaart():
+kaarten = []   #lege lijst voor de kaarten
+def alle_kaart():      #hier definieren we de 81 kaarten
     for kleur in ("green", "red", "purple"):
         for symbool in ("oval", "squiggle", "diamond"):
             for vulling in ("filled", "shaded", "empty"):
                 for aantal in (1, 2, 3):
                     kaarten.append((str(kleur), str(symbool), str(vulling), int(aantal)))
 alle_kaart()
-random.shuffle(kaarten) 
-twaalf_kaarten = kaarten[:12]
+random.shuffle(kaarten)  #deck schudden
+twaalf_kaarten = kaarten[:12] #eerste 12 kaarten paken (slicing)
 
-a=list(set(itertools.combinations(twaalf_kaarten,3)))
-print("12 kaarten kunnen",len(a)," verschillende groepen met verschillende 3 kaarten maken ") 
+a=list(set(itertools.combinations(twaalf_kaarten,3))) #combinatie maken voor de 12 kaarten
+print("Met 12 kaarten kunnen",len(a)," verschillende combinatie met verschillende 3 kaarten maken ") 
