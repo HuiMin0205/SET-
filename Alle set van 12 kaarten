@@ -1,27 +1,27 @@
 import random
 import itertools
 
-kaarten = []
-def alle_kaart():
+kaarten = [] #lege lijst
+def alle_kaart(): #definitie van kaarten
     for kleur in ("green", "red", "purple"):
         for symbool in ("oval", "squiggle", "diamond"):
             for vulling in ("filled", "shaded", "empty"):
                 for aantal in (1, 2, 3):
                     kaarten.append((str(kleur), str(symbool), str(vulling), int(aantal)))
-alle_kaart()
-random.shuffle(kaarten) 
-twaalf_kaarten = kaarten[:12]
+alle_kaart() #informatie pakken
+random.shuffle(kaarten) #schudden van de deck
+twaalf_kaarten = kaarten[:12] #eerste 12 kaarten van de lijst pakken
 print(twaalf_kaarten)
 
-a=list(set(itertools.combinations(twaalf_kaarten,3)))
-print(a)# hier staat verschillende groepen dat een of geen set
+a=list(set(itertools.combinations(twaalf_kaarten,3))) #alle combinatie van de 12 kaarten maken
+print(a)# hier staat verschillende groepen dat een of geen set vormen
 def b(p):
     card=kaarten[0]
     kaarten.remove(kaarten[0])
     print(str(card))
     return card
 
-while True:
+while True: #algoritme 
     for i in range(len(a)):
         b1=a[i][0]
         b2=a[i][1]
@@ -38,7 +38,7 @@ while True:
                                                     b1[3]==b2[3]!=b3[3] or\
                                                         b1[3]!=b2[3]==b3[3]or\
                                                             b1[3]==b3[3]!=b2[3]:
-                    pass
+                    pass #om de combintaies die geen set maken niet printen
         else: 
             print (b1,b2,b3, "Het is een SET!")
             print("Deze SET zit op de" ,i+1,"van de 220 verschillende groepen van 12 kaarten.")#Waar staat deze set groep in de 220 verschillende groepen.
