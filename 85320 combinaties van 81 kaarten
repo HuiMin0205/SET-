@@ -11,5 +11,5 @@ def alle_kaart():
 alle_kaart()
 random.shuffle(kaarten) 
 
-c=list(set(itertools.combinations(kaarten,3)))
-print("81 kaarten kunnen",len (c)," verschillende groepen met verschillende 3 kaarten maken ") 
+c=list(set(itertools.combinations(kaarten,3))) #combinatie maken van alle 81 kaarten
+print("Van 81 kaarten kunnen",len (c)," verschillende groepen met verschillende 3 kaarten maken ") #aantal combinatie die 81 kaarten kan maken 
