@@ -1,7 +1,7 @@
 import random
 import itertools
 
-class Kaart1:
+class Kaart1: #klasse van kaart
     def _init_(self, kleur, symbool, vulling, aantal):
         self.kleur = kleur
         self.symbool = symbool
