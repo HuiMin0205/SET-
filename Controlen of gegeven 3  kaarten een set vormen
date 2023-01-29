@@ -1,11 +1,11 @@
-def setje (kaart1, kaart2, kaart3):
+def setje (kaart1, kaart2, kaart3): #gegevens van de kaarten
 	kleur = alle (kaart1.Kleur, kaart2.Kleur, kaart3.Kleur)
 	vorm = alle (kaart1.Vorm, kaart2.Vorm, kaart3.Vorm)
 	aantal = alle (kaart1.Aantal, kaart2.Aantal, kaart3.Aantal)
 	vulling = alle (kaart1.Vulling, kaart2.Vulling, kaart3.Vulling)
 	return kleur and vorm and aantal and vulling
   
-def alle (informatie1, informatie2, informatie3):
+def alle (informatie1, informatie2, informatie3): #informatie pakken
 	if informatie1 == informatie2 and informatie2 == informatie3 and informatie1 == informatie3:
 		return True
 	elif (informatie1 != informatie2) and (informatie2 != informatie3) and (informatie3 != informatie1):
@@ -13,13 +13,13 @@ def alle (informatie1, informatie2, informatie3):
 	else:
 		return False
     
-def wel_of_geen_set(kaart1, kaart2, kaart3):
+def wel_of_geen_set(kaart1, kaart2, kaart3): #bericht van de controle
     if setje(kaart1, kaart2, kaart3):
         return "Het is een SET!"
     else:
         return "Het is geen SET!"
 
-class Kaart:
+class Kaart: #klasse kaart
 	def __init__ (self, Kleur, Vorm, Aantal, Vulling):
 		self.Kleur = Kleur
 		self.Vorm = Vorm
@@ -27,13 +27,13 @@ class Kaart:
 		self.Vulling = Vulling
 		self.geklikte_kaarten = False
     		
-	def __eq__ (self, other):
+	def __eq__ (self, other): #definiëren of de kaarten gelijk zijn
 		return  self.Kleur == other.Kleur and \
 				self.Vorm == other.Vorm and \
 				self.Aantal == other.Aantal and \
 				self.Vulling == other.Vulling
 
-	def __ne__ (self, other):
+	def __ne__ (self, other): # definiëren of de kaarten niet gelijk zijn
 		return not self.__eq__(other)
 	
 	def clicked (self, button_name):
