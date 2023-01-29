@@ -1,19 +1,19 @@
 import random
 import itertools
 
-kaarten = []
-def alle_kaart():
-    for kleur in ("green", "red", "purple"):
-        for symbool in ("oval", "squiggle", "diamond"):
-            for vulling in ("filled", "shaded", "empty"):
-                for aantal in (1, 2, 3):
+kaarten = [] #lege lijst
+def alle_kaart(): #definitie van alle kaarten
+    for kleur in ("green", "red", "purple"): #mogelijke kleuren die een kaart kan hebben
+        for symbool in ("oval", "squiggle", "diamond"):   #mogelijke symbolen die een kaart kan hebben
+            for vulling in ("filled", "shaded", "empty"):   #mogelijke vulling die een kaart kan hebben
+                for aantal in (1, 2, 3):           #mogelijke hoeveelheid van figuur die een kaart kan hebben
                     kaarten.append((str(kleur), str(symbool), str(vulling), int(aantal)))
-alle_kaart()
-random.shuffle(kaarten) 
-twaalf_kaarten = kaarten[:12]
+alle_kaart()   #informatie pakken 
+random.shuffle(kaarten) #deck schudden
+twaalf_kaarten = kaarten[:12] #eerste 12 kaarten paken
 
-a=list(set(itertools.combinations(twaalf_kaarten,3)))
-print("Van 12 kaarten kunnen",len(a)," verschillende combinaties met drie verschillende kaarten maken.") 
+a=list(set(itertools.combinations(twaalf_kaarten,3))) #combinatie van de 12 kaarten maken
+print("Van 12 kaarten kunnen",len(a)," verschillende combinaties met drie verschillende kaarten maken.") #aantal combinatie die 12 kaarten kan maken
 
 def b(p):
     card=kaarten[0]
@@ -21,7 +21,7 @@ def b(p):
     print(str(card))
     return card
 
-while True:
+while True: #algoritme om te kijken of de combinatie een set of geen set vormen
     for i in range(len(a)):
         b1=a[i][0]
         b2=a[i][1]
