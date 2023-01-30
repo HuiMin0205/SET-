@@ -1,0 +1,123 @@
+import pygame
+
+pygame.init() #pygame initialiseren
+
+breedte = 900
+hoogte = 800
+background = pygame.image.load('blue_background.jpg') #achtergrond van scherm
+setpicture = pygame.image.load('SET-Play-Now-button-6-30-15.png') #foto van set
+setpicturerect= setpicture.get_rect()
+setpicturerect.center = ((900//2, 500)) #foto in het midden zetten
+
+scherm = pygame.display.set_mode([breedte, hoogte]) #scherm
+pygame.display.set_caption('SET!')
+fps =60 #frames per second
+timer = pygame.time.Clock()
+pygame.font.init()
+font = pygame.font.Font('freesansbold.ttf', 44) #lettertype en grootte
+kleinere_font = pygame.font.Font('freesansbold.ttf', 36) 
+kleinst_font = pygame.font.Font('freesansbold.ttf', 16) 
+active = False
+archief = [0,0]
+
+
+def plus_drie_kaarten():
+    #zet drie kaarten
+    print("3 kaarten toevoegen")
+
+def regels():
+    print('Een set bestaat uit drie kaarten die aan al deze voorwaarden voldoen:')
+    print('Ze hebben allemaal hetzelfde aantal figuren of hebben allemaal verschillende aantal.')
+    print('Ze hebben allemaal dezelfde vorm of allemaal verschillende vormen.')
+    print('Ze hebben allemaal dezelfde vulling of allemaal verschillende vulling')
+    print('Ze hebben allemaal dezelfde kleur of allemaal verschillende kleuren.')
+
+
+def draw_game(act, record): #buttons 
+    lijst = []
+    
+    #initially on startup
+    if not act:
+        deal = pygame.draw.rect(scherm, 'white', [210,70,500,100],0,5)
+        deal_text = font.render('PLAY Game', True, 'black')
+        scherm.blit(deal_text, (340,95))
+        lijst.append(deal)
+
+        rules = pygame.draw.rect(scherm, 'white', [210,200,500,100],0,5)
+        deal_text = font.render('Rules', True, 'black')
+        scherm.blit(deal_text, (400,230))
+        lijst.append(rules)
+        
+
+        scherm.blit(setpicture, setpicturerect)
+
+    else: 
+        add = pygame.draw.rect(scherm, 'white', [40,650,350,100],0,5)
+        pygame.draw.rect(scherm,"gray3", [40,650,350,100],3,5)
+        add_text = font.render('Add 3 Cards', True, 'red')
+        scherm.blit(add_text, (75,675))
+        lijst.append(add)
+
+        check = pygame.draw.rect(scherm, 'white', [500,650,350,100],0,5)
+        pygame.draw.rect(scherm,"gray3", [500,650,350,100],3,5)
+        check_text = font.render('Check SET', True, 'green')
+        scherm.blit(check_text, (550,675))
+        lijst.append(check)
+
+        back = pygame.draw.rect(scherm, 'white', [850,775,350,100],0,5)
+        back_text = kleinst_font.render('back', True, 'black')
+        scherm.blit(back_text, (855,775))
+        lijst.append(back)
+
+
+        score_text = kleinere_font.render(f'          Found: {record[0]}                              Cards left:{record[1]}', True, 'black')
+        scherm.blit(score_text, (15, 750))
+
+       
+    return lijst
+
+
+
+
+#main game loop
+run = True
+while run:
+   
+    #run game at framerate
+    timer.tick(fps)
+    scherm.fill((0, 0, 0))
+    scherm.blit(background, (0, 0))
+    buttons = draw_game(active,  archief) 
+
+    for event in pygame.event.get():
+       
+        if event.type == pygame.QUIT: 
+            run = False
+
+        if event.type == pygame.MOUSEBUTTONUP:
+            if not active:
+                if buttons[0].collidepoint(event.pos):
+                    active = True
+                    initial_deal = True 
+                    outcome = 0
+                    
+                
+                if buttons[1].collidepoint(event.pos): # regels (niet uitgewerkt)
+                    regel = True
+                    regels()
+           
+            else:
+                if buttons[0].collidepoint(event.pos): #add 3 cards (niet uitgewerkt)
+                    plus_drie_kaarten() 
+                    
+                    
+                if buttons[1].collidepoint(event.pos): #check of de 3 kaarten een set vormen (niet uitgewerkt)
+                    print("check")
+                    
+
+                if buttons[-1].collidepoint(event.pos):  #terug naar de main menu 
+                    active = False
+                
+
+    pygame.display.flip()
+pygame.quit()
