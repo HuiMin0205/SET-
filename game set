@@ -1,43 +1,64 @@
-import random
 import pygame
+import random
 
 pygame.init()
 
-class Kaart1:
-    def _init_(self, kleur, symbool, vulling, aantal):
+WIDTH = 900
+HEIGHT = 800
+background = pygame.image.load('blue_background.jpg')
+setpicture = pygame.image.load('SET-Play-Now-button-6-30-15.png')
+setpicturerect= setpicture.get_rect()
+setpicturerect.center = ((900//2, 500))
+
+screen = pygame.display.set_mode([WIDTH, HEIGHT]) #scherm
+pygame.display.set_caption('SET!')
+fps =60 #frames per second
+timer = pygame.time.Clock()
+pygame.font.init()
+font = pygame.font.Font('freesansbold.ttf', 44) #lettertype en grootte
+smaller_font = pygame.font.Font('freesansbold.ttf', 36) 
+smallest_font = pygame.font.Font('freesansbold.ttf', 16) 
+active = False
+records = [0,0]
+regel = False
+kaart = []
+
+initial_deal = False
+outcome = 0
+
+class Kaart1: #klasse van deck
+    def init(self, kleur, symbool, vulling, aantal):
         self.kleur = kleur
         self.symbool = symbool
         self.vulling = vulling
         self.aantal = aantal
 
-    def _hash_(self):
+    def hash(self): #de hash waarde van de kaarten te krijgen
         return hash((self.kleur, self.symbool, self.vulling, self.aantal))
     
+#mogelijke gegevens van de kaarten
 kleuren = ["green", "red", "purple"] # de mogelijke kleuren voor kaarten
 symbolen = ["oval", "squiggle", "diamond"] # de mogelijke symbolen voor kaarten
 vullingen = ["filled", "shaded", "empty"] # de vulling van de symbolen op een kaart
 aantallen = [1, 2, 3] # het aantal symbolen op een kaart
-kaarten = []
+
+
+kaarten = [] 
 for kleur in kleuren:
         for symbool in symbolen:
             for vulling in vullingen:
                 for aantal in aantallen:
                     kaarten.append((str(kleur), str(symbool), str(vulling), int(aantal)))
-lengte = 1000
-breede = 800
-scherm = pygame.display.set_mode([lengte, breede])
-pygame.display.set_caption('Game SET!')
-fps = 60
-tijd = pygame.time.Clock()
-letter = pygame.font.Font('freesansbold.ttf', 45)
-kleineletter= pygame.font.Font('freesansbold.ttf', 30)
-doen=False
-cijfer=[0,0,0]
-player=0
-computer=0
-doel= False
-kaart=[]
-beginnen=0
+
+def alle_kaart():
+    for kleur in ("green", "red", "purple"):
+        for symbool in ("oval", "squiggle", "diamond"):
+            for vulling in ("filled", "shaded", "empty"):
+                for aantal in (1, 2, 3):
+                    kaarten.append((str(kleur), str(symbool), str(vulling), int(aantal)))
+alle_kaart()
+random.shuffle(kaarten) 
+twaalf_kaarten = kaarten[:12]
 
 def alle_kaarten(a,b):
     kaarten=random.randint(0, len(b))
@@ -46,48 +67,160 @@ def alle_kaarten(a,b):
     print(a,b)
     return a,b
 
-def maken_kaart(doe,record):
-    lijst=[]
-    if not doe:
-        inleiding=pygame.draw.rect(scherm,"white", [250,50,500,100],0,5)
-        pygame.draw.rect(scherm,"darkseagreen1", [250,50,500,100],3,5)
-        inleiding_text=letter.render("Welkom bij de SET!", True, "black")
-        scherm.blit(inleiding_text, (280,60))
-        lijst.append(inleiding)
-    else:
-        extra_drie_kaarten=pygame.draw.rect(scherm,"white", [100,600,400,100],0,5)
-        pygame.draw.rect(scherm,"gray3", [100,600,400,100],3,5)
-        extra_drie_kaarten_text=letter.render("Plus drie kaarten", True, "red")
-        scherm.blit(extra_drie_kaarten_text, (110,650))
-        lijst.append(extra_drie_kaarten)
-        het_is_een_set=pygame.draw.rect(scherm,"white", [550,600,350,100],0,5)
-        pygame.draw.rect(scherm,"gray3", [550,600,350,100],3,5)
-        het_is_een_set_text=letter.render("Het is een SET!", True, "green")
-        scherm.blit(het_is_een_set_text, (560,650))
-        lijst.append(het_is_een_set)
-        score_text=kleineletter.render(f'Won:{record[0]}   Verliezen:{record[1]}   Gelijk:{record[2]}',True, "black")
-        scherm.blit(score_text,(300,700))
-    return lijst
+class Kaart: #klasse kaart
+	def __init__ (self, Kleur, Vorm, Aantal, Vulling):
+		self.Kleur = Kleur
+		self.Vorm = Vorm
+		self.Aantal = Aantal
+		self.Vulling = Vulling
+		self.geklikte_kaarten = False
+    		
+	def __eq__ (self, other): #definiëren of de kaarten gelijk zijn
+		return  self.Kleur == other.Kleur and \
+				self.Vorm == other.Vorm and \
+				self.Aantal == other.Aantal and \
+				self.Vulling == other.Vulling
+
+	def __ne__ (self, other): # definiëren of de kaarten niet gelijk zijn
+		return not self.__eq__(other)
+	
+	def clicked (self, button_name):
+		self.geklikte_kaarten = not self.geklikte_kaarten
+
+	def update (self):
+		pass 
+
+
+alle_kaart()
+random.shuffle(kaarten) 
+drie_kaarten = kaarten[:3]
+
+def plus_drie_kaarten():
+    #zet drie kaarten
+    print("3 kaarten toevoegen")
+
+
+def checken_set():
+    def setje (kaart1, kaart2, kaart3): #gegevens van de kaarten
+        kleur = alle (kaart1.Kleur, kaart2.Kleur, kaart3.Kleur)
+        vorm = alle (kaart1.Vorm, kaart2.Vorm, kaart3.Vorm)
+        aantal = alle (kaart1.Aantal, kaart2.Aantal, kaart3.Aantal)
+        vulling = alle (kaart1.Vulling, kaart2.Vulling, kaart3.Vulling)
+        return kleur and vorm and aantal and vulling
+    
+    def alle (informatie1, informatie2, informatie3): #informatie pakken
+        if informatie1 == informatie2 and informatie2 == informatie3 and informatie1 == informatie3:
+            return True
+        elif (informatie1 != informatie2) and (informatie2 != informatie3) and (informatie3 != informatie1):
+            return True
+        else:
+            return False
         
-run=True
+    def wel_of_geen_set(kaart1, kaart2, kaart3): #bericht van de controle
+        if setje(kaart1, kaart2, kaart3):
+            return "Het is een SET!"
+        else:
+            return "Het is geen SET!"  
+
+
+
+def regels():
+    print('Een set bestaat uit drie kaarten die aan al deze voorwaarden voldoen:')
+    print('Ze hebben allemaal hetzelfde aantal figuren of hebben allemaal verschillende aantal.')
+    print('Ze hebben allemaal dezelfde vorm of allemaal verschillende vormen.')
+    print('Ze hebben allemaal dezelfde vulling of allemaal verschillende vulling')
+    print('Ze hebben allemaal dezelfde kleur of allemaal verschillende kleuren.')
+
+#pygame
+
+def draw_game(act, record): #buttons 
+    button_list = []
+    
+    #initially on startup
+    if not act:
+        deal = pygame.draw.rect(screen, 'white', [210,70,500,100],0,5)
+        deal_text = font.render('PLAY Game', True, 'black')
+        screen.blit(deal_text, (340,95))
+        button_list.append(deal)
+
+        rules = pygame.draw.rect(screen, 'white', [210,200,500,100],0,5)
+        deal_text = font.render('Rules', True, 'black')
+        screen.blit(deal_text, (400,230))
+        button_list.append(rules)
+        
+
+        screen.blit(setpicture, setpicturerect)
+
+    else: 
+        add = pygame.draw.rect(screen, 'white', [40,650,350,100],0,5)
+        pygame.draw.rect(screen,"gray3", [40,650,350,100],3,5)
+        add_text = font.render('Add 3 Cards', True, 'red')
+        screen.blit(add_text, (75,675))
+        button_list.append(add)
+
+        check = pygame.draw.rect(screen, 'white', [500,650,350,100],0,5)
+        pygame.draw.rect(screen,"gray3", [500,650,350,100],3,5)
+        check_text = font.render('Check SET', True, 'green')
+        screen.blit(check_text, (550,675))
+        button_list.append(check)
+
+        back = pygame.draw.rect(screen, 'white', [850,775,350,100],0,5)
+        back_text = smallest_font.render('back', True, 'black')
+        screen.blit(back_text, (855,775))
+        button_list.append(back)
+
+
+        score_text = smaller_font.render(f'          Found: {record[0]}                              Cards left:{record[1]}', True, 'black')
+        screen.blit(score_text, (15, 750))
+
+       
+    return button_list
+
+
+
+
+#main game loop
+run = True
 while run:
-    tijd.tick(fps)
-    scherm.fill('cadetblue1')
-    if doel:
-        for i in range(12): 
-            kaart,kaarten=alle_kaarten(kaart,kaarten)
-        print(kaart)
-        doel=False
-    bedoel=maken_kaart(doen, cijfer)
+   
+    #run game at framerate
+    timer.tick(fps)
+    screen.fill((0, 0, 0))
+    screen.blit(background, (0, 0))
+    buttons = draw_game(active,  records) 
+
+
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+       
+        if event.type == pygame.QUIT: 
             run = False
+
         if event.type == pygame.MOUSEBUTTONUP:
-            if not doen:
-                if bedoel[0].collidepoint(event.pos):
-                    doen = True
-                    doel= True
-                    kaart=[]
-                    beginnen=0
+            if not active:
+                if buttons[0].collidepoint(event.pos):
+                    active = True
+                    initial_deal = True 
+                    outcome = 0
+                    
+                
+                if buttons[1].collidepoint(event.pos):
+                    regel = True
+                    regels()
+           
+            else:
+                if buttons[0].collidepoint(event.pos): #add 3 cards (niet uitgewerkt)
+                    plus_drie_kaarten()
+                    
+                    
+                if buttons[1].collidepoint(event.pos): #check of de 3 kaarten een set vormen (niet uitgewerkt)
+                    print("check")
+                    checken_set()
+
+                if buttons[-1].collidepoint(event.pos):  #terug naar de main menu
+                    active = False
+                
+
     pygame.display.flip()
 pygame.quit()
+
+
