@@ -2,14 +2,15 @@ import pygame
 
 pygame.init() #pygame initialiseren
 
-breedte = 900
-hoogte = 800
 #foto scherm
 background = pygame.image.load('blue_background.jpg') #achtergrond van scherm
 setpicture = pygame.image.load('SET-Play-Now-button-6-30-15.png') #foto van set
 setpicturerect= setpicture.get_rect()
 setpicturerect.center = ((900//2, 500)) #foto in het midden zetten
 
+
+breedte = 900
+hoogte = 800
 scherm = pygame.display.set_mode([breedte, hoogte]) #scherm display
 pygame.display.set_caption('SET!')
 
